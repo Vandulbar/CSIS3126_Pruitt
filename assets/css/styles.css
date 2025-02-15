@@ -1,0 +1,263 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #04021c;
+  color: white;
+  padding: 10px 20px;
+}
+
+.logo {
+  max-height: 80px;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+  padding: 0;
+}
+
+nav ul li {
+  display: inline;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+main {
+  padding: 20px;
+}
+
+a {
+  text-decoration: none;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.product img {
+  width: 100%;
+  height: auto;
+}
+
+footer {
+  background-color: #04021c;
+  color: white;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.bottom-footer {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 10px;
+}
+
+.newsletter input {
+  padding: 5px;
+}
+
+.newsletter button {
+  padding: 5px 10px;
+  background-color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.preview {
+  max-height: 150px;
+  max-width: 200px;
+}
+
+/* Header Layout */
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    width: 100%;
+}
+
+.header-nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-grow: 1;
+    justify-content: center;
+}
+
+/* Move New Arrivals and Genres next to the search bar */
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-right: 10px;
+}
+
+/* Search Bar and Icons Alignment */
+.search-bar-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-grow: 1;
+    justify-content: center;
+}
+
+.search-bar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    overflow: hidden;
+    transition: width 0.3s ease;
+}
+
+.search-bar input {
+    width: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    transition: width 0.3s ease, padding 0.3s ease;
+}
+
+.search-bar button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 10px;
+    color: white; /* Make search icon white */
+}
+
+.search-bar.active input {
+    width: 200px;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Align nav links and search bar together */
+.nav-search-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-grow: 1;
+    justify-content: center;
+}
+
+/* Align icons next to the search bar */
+.header-icons-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.header-icons {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Icons Style */
+.header-icons i {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* Product Grid for Index Page */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 20px;
+    justify-content: center;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Product Preview (Twice as big as random products) */
+.product-preview {
+    width: 100%;
+    max-width: 300px;
+    height: 400px;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.product-preview img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.product-preview p {
+    margin: 10px 0;
+    font-size: 16px;
+}
+
+.product-preview:hover {
+    transform: scale(1.05);
+}
+
+/* Remove underline from all links */
+.header-container a, .footer-container a {
+    color: white !important;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .nav-search-container {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+    
+    .header-icons {
+        justify-content: center;
+        width: 100%;
+        margin-top: 10px;
+    }
+    
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .product-grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
