@@ -1,16 +1,38 @@
 <?php
-session_start(); // Ensure session starts
+session_start();
+include 'includes/db.php';
 
-// Store last visited page only if it's not login.php and user isn't logged in
-if (!isset($_SESSION["User_Id"]) && !isset($_SESSION["last_page"]) && basename($_SERVER["PHP_SELF"]) != "login.php") {
-    $_SESSION["last_page"] = $_SERVER["REQUEST_URI"];
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = trim($_POST["Email"]);
+    $password = $_POST["Password"];
+
+    // Check for email
+    $stmt = $conn->prepare("SELECT User_Id, First_Name, Password FROM User WHERE Email = ?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $user = $result->fetch_assoc();
+
+    if ($user && password_verify($password, $user["Password"])) {
+        // Store user info in session
+        $_SESSION["User_Id"] = $user["User_Id"];
+        $_SESSION["First_Name"] = $user["First_Name"];
+
+        // Determine the correct redirect location
+        if (!empty($_SESSION["last_page"]) && basename($_SESSION["last_page"]) != "login.php") {
+            $redirect_page = $_SESSION["last_page"];
+            unset($_SESSION["last_page"]); // Clear the session variable
+        } else {
+            $redirect_page = "index.php"; // Default to home page
+        }
+
+        header("Location: " . $redirect_page);
+        exit();
+    } else {
+        $error = "Invalid email or password!";
+    }
 }
-
-// Debugging output
-echo "<!-- Last Page: " . ($_SESSION["last_page"] ?? 'Not Set') . " -->";
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -32,31 +54,15 @@ echo "<!-- Last Page: " . ($_SESSION["last_page"] ?? 'Not Set') . " -->";
         <div class="nav-links">
             <a href="bestSellers.php">Best Sellers</a>
             <a href="newArrivals.php">New Arrivals</a>
-            <a href="allPosters.php">All Posters</a>
-            <a href="genres.php">Genres</a>
+            <a href="#">Genres</a>
         </div>
         <div class="header-icons">
           <form method="GET" action="search.php" class="search-bar">
             <input type="text" name="query" placeholder="Search by name or tag..." required>
             <button type="submit" id="search-button"><i class="bi bi-search"></i></button>
           </form>
-    <?php 
-    if (isset($_SESSION["User_Id"])): ?>
-        <span>Welcome, <?php echo htmlspecialchars($_SESSION["First_Name"]); ?>!</span>
-        <a href="logout.php">Logout</a>
-    <?php else: 
-        // Store the last page visited before login
-        $_SESSION["last_page"] = $_SERVER["REQUEST_URI"]; 
-    ?>
-        <a href="login.php"><i class="bi bi-person"></i></a>
-    <?php endif; ?>
-    <?php
-session_start(); // Ensure session starts at the top of header.php
-$_SESSION["last_page"] = $_SERVER["REQUEST_URI"]; 
-echo "<!-- Last visited page: " . $_SESSION["last_page"] . " -->";
-?>
+          <a href="login.php"><i class="bi bi-person"></i></a>
           <i class="bi bi-cart"></i>
-
           <script>
             document.addEventListener("DOMContentLoaded", function() {
               const searchBar = document.querySelector(".search-bar");
@@ -85,3 +91,12 @@ echo "<!-- Last visited page: " . $_SESSION["last_page"] . " -->";
         </div>
       </div>
     </header>
+    <h2>Login</h2>
+    <?php if (isset($error)) echo "<p style='color: red;'>$error</p>"; ?>
+    <form action="login.php" method="POST">
+        <input type="email" name="Email" placeholder="Email" required><br>
+        <input type="password" name="Password" placeholder="Password" required><br>
+        <button type="submit">Login</button>
+    </form>
+    <p>Don't have an account? <a href="register.php">Register here</a></p>
+<?php include 'includes/footer.php'?>

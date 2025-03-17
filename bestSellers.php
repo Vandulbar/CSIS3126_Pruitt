@@ -4,10 +4,7 @@
 <main>
   <div class="product-grid">
     <?php
-      $sql = "SELECT p.* FROM Product p
-      JOIN ProductTag pt ON p.Product_Id = pt.Product_Id
-      JOIN Tag t ON pt.Tag_ID = t.Tag_ID
-      WHERE t.TagName = 'Best Seller'";
+      $sql = "SELECT * FROM Product ORDER BY amount_sold DESC LIMIT 9";
       $result = $conn->query($sql);
 
       if ($result->num_rows > 0) {

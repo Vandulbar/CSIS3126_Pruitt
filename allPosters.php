@@ -5,9 +5,7 @@
     <div class="product-grid">
         <?php
         // Fetch products added in the last 30 days
-        $sql = "SELECT * FROM product 
-        WHERE Date_Added >= NOW() - INTERVAL 30 DAY 
-        ORDER BY date_added DESC";
+        $sql = "SELECT * FROM Product ORDER BY Name ASC";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
@@ -21,7 +19,7 @@
                 echo "</div>";
             }
         } else {
-            echo "<p>No products found.</p>";
+            echo "<p>No new arrivals in the last month.</p>";
         }
         ?>
     </div>

@@ -37,16 +37,16 @@
     ?>
     <section class="related-products">
         <h2>Check out our other products!</h2>
-        <div class="random-products">
+        <div class="product-grid">
             <?php
             // Fetch 2 random products excluding the current one
-            $random_stmt = $conn->prepare("SELECT * FROM product WHERE Product_Id != ? ORDER BY RAND() LIMIT 2");
+            $random_stmt = $conn->prepare("SELECT * FROM product WHERE Product_Id != ? ORDER BY RAND() LIMIT 3");
             $random_stmt->bind_param("i", $product_id);
             $random_stmt->execute();
             $random_result = $random_stmt->get_result();
 
             while ($random_product = $random_result->fetch_assoc()) {
-                echo "<div class='random-product'>";
+                echo "<div class='product-preview'>";
                 echo "<a href='product.php?id=" . $random_product['Product_Id'] . "'>";
                 echo "<img src='assets/images/" . htmlspecialchars($random_product['Image']) . "' alt='" . htmlspecialchars($random_product['Name']) . "'>";
                 echo "<p>" . htmlspecialchars($random_product['Name']) . "</p>";
