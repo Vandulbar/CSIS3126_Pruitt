@@ -1,5 +1,29 @@
-<?php include 'includes/header.php'; ?>
-<?php include 'includes/db.php'; ?>
+<?php 
+include 'includes/header.php';
+include 'includes/db.php'; 
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_to_cart'])) {
+    $product_id = intval($_POST['product_id']);
+    $quantity = intval($_POST['quantity'] ?? 1);
+
+    // Create cart if not exists
+    if (!isset($_SESSION['cart'])) {
+        $_SESSION['cart'] = [];
+    }
+
+    // If already in cart, increase quantity
+    if (isset($_SESSION['cart'][$product_id])) {
+        $_SESSION['cart'][$product_id] += $quantity;
+    } else {
+        $_SESSION['cart'][$product_id] = $quantity;
+    }
+
+    // Optional: Redirect to cart page or show message
+    header("Location: cart.php");
+    exit();
+}
+
+?>
 
 <main>
     <?php
@@ -24,7 +48,12 @@
             echo "<h1>" . htmlspecialchars($product['Name']) . "</h1>";
             echo "<p><strong>Price:</strong> $" . number_format($product['Price'], 2) . "</p>";
             echo "<p class='product-description'>Each poster is 24x36 inches and is shipped in a protective cardboard case to ensure it arrives safely.</p>";
-            echo "<button class='add-to-cart'>Add to Cart</button>";
+            echo "<form method='POST' action=''>";
+            echo "<input type='hidden' name='product_id' value='" . $product['Product_Id'] . "'>";
+            echo "<input type='number' name='quantity' value='1' min='1' style='width: 60px;'> ";
+            echo "<button type='submit' name='add_to_cart'>Add to Cart</button>";
+            echo "</form>";
+
             echo "</div>";
 
             echo "</div>"; // Close .product-container

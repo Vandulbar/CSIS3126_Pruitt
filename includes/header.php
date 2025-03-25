@@ -42,7 +42,7 @@ echo "<!-- Last Page: " . ($_SESSION["last_page"] ?? 'Not Set') . " -->";
           </form>
     <?php 
     if (isset($_SESSION["User_Id"])): ?>
-        <span>Welcome, <?php echo htmlspecialchars($_SESSION["First_Name"]); ?>!</span>
+        <span>Welcome, <a href="account.php"><?php echo htmlspecialchars($_SESSION["First_Name"]); ?></a>!</span>
         <a href="logout.php">Logout</a>
     <?php else: 
         // Store the last page visited before login
@@ -55,7 +55,7 @@ session_start(); // Ensure session starts at the top of header.php
 $_SESSION["last_page"] = $_SERVER["REQUEST_URI"]; 
 echo "<!-- Last visited page: " . $_SESSION["last_page"] . " -->";
 ?>
-          <i class="bi bi-cart"></i>
+          <a href="cart.php"><i class="bi bi-cart"></i></a>
 
           <script>
             document.addEventListener("DOMContentLoaded", function() {
