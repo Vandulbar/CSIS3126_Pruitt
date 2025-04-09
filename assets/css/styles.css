@@ -1,3 +1,5 @@
+
+/*styles.css*/
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -262,23 +264,29 @@ footer {
     }
 }
 
-/* Checkbox Styling */
-.checkbox-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
+.genre-tags {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 20px 0;
 }
 
-.checkbox-container label {
-    background: #f4f4f4;
-    padding: 8px 12px;
-    border-radius: 5px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
+.genre-tags form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
 }
 
-.checkbox-container input {
-    margin-right: 8px;
+/* Final forceful cleanup for links and lists */
+a,
+.header-container a,
+.footer-container a {
+  text-decoration: none !important;
+  color: inherit;
 }
 
+a:hover {
+  text-decoration: none !important;
+}

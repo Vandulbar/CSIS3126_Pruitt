@@ -1,4 +1,5 @@
 <?php
+//db.php
 $servername = "localhost";
 $username = "root";  // Default for MAMP
 $password = "root";  // Default for MAMP

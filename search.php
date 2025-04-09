@@ -1,7 +1,11 @@
-<?php include 'includes/header.php'; ?>
-<?php include 'includes/db.php'; ?>
+<?php
+// search.php
+include 'includes/header.php';
+include 'includes/db.php';
+include 'includes/product_preview.php';
+?>
 
-<main>
+<main class="text-center">
     <h1>Search Results</h1>
 
     <div class="product-grid">
@@ -10,10 +14,10 @@
             $search = trim($_GET['query']);
 
             // Query to search by product name OR by tag
-            $sql = "SELECT DISTINCT p.* FROM Product p
-                    LEFT JOIN ProductTag pt ON p.Product_Id = pt.Product_Id
-                    LEFT JOIN Tag t ON pt.Tag_ID = t.Tag_ID
-                    WHERE p.Name LIKE ? OR t.TagName LIKE ?";
+            $sql = "SELECT DISTINCT p.* FROM product p
+                    LEFT JOIN producttag pt ON p.productId = pt.productId
+                    LEFT JOIN tag t ON pt.tagId = t.tagId
+                    WHERE p.name LIKE ? OR t.tagName LIKE ?";
 
             $stmt = $conn->prepare($sql);
             $searchTerm = "%" . $search . "%";
@@ -24,10 +28,10 @@
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                     echo "<div class='product-preview'>";
-                    echo "<a href='product.php?id=" . $row['Product_Id'] . "'>";
-                    echo "<img src='assets/images/" . htmlspecialchars($row['Image']) . "' alt='" . htmlspecialchars($row['Name']) . "'>";
-                    echo "<p>" . htmlspecialchars($row['Name']) . "</p>";
-                    echo "<p>$" . number_format($row['Price'], 2) . "</p>";
+                    echo "<a href='product.php?id=" . $row['productId'] . "'>";
+                    echo "<img src='assets/images/" . htmlspecialchars($row['image']) . "' alt='" . htmlspecialchars($row['name']) . "'>";
+                    echo "<p>" . htmlspecialchars($row['name']) . "</p>";
+                    echo "<p>$" . number_format($row['price'], 2) . "</p>";
                     echo "</a>";
                     echo "</div>";
                 }

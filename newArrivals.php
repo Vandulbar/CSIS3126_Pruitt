@@ -1,30 +1,19 @@
-<?php include 'includes/header.php'; ?>
-<?php include 'includes/db.php'; ?>
+<?php
+// newArrivals.php
+include 'includes/header.php';
+include 'includes/db.php';
+include 'includes/product_preview.php';
+?>
 
-<main>
-    <div class="product-grid">
-        <?php
-        // Fetch products added in the last 30 days
-        $sql = "SELECT * FROM product 
-        WHERE Date_Added >= NOW() - INTERVAL 30 DAY 
-        ORDER BY date_added DESC";
-        $result = $conn->query($sql);
+<main class="text-center">
+  <div class="product-grid">
+    <?php
+      $sql = "SELECT * FROM product WHERE dateAdded >= NOW() - INTERVAL 30 DAY ORDER BY dateAdded DESC LIMIT 9";
+      $result = $conn->query($sql);
 
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                echo "<div class='product-preview'>";
-                echo "<a href='product.php?id=" . $row['Product_Id'] . "'>";
-                echo "<img src='assets/images/" . htmlspecialchars($row['Image']) . "' alt='" . htmlspecialchars($row['Name']) . "'>";
-                echo "<p>" . htmlspecialchars($row['Name']) . "</p>";
-                echo "<p>$" . number_format($row['Price'], 2) . "</p>";
-                echo "</a>";
-                echo "</div>";
-            }
-        } else {
-            echo "<p>No products found.</p>";
-        }
-        ?>
-    </div>
+      displayProductPreviews($result);
+    ?>
+  </div>
 </main>
 
 <?php include 'includes/footer.php'; ?>
