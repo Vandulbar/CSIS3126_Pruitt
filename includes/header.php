@@ -54,7 +54,7 @@ echo "<!-- Last Page: " . ($_SESSION["lastPage"] ?? 'Not Set') . " -->";
             </span>
             <a href="logout.php">Logout</a>
           <?php else:
-            $_SESSION["last_page"] = $_SERVER["REQUEST_URI"];
+            $_SESSION["lastPage"] = $_SERVER["REQUEST_URI"];
           ?>
             <a href="login.php"><i class="bi bi-person"></i></a>
           <?php endif; ?>

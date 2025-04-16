@@ -33,70 +33,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $error = "Invalid email or password!";
     }
 }
+
+include 'includes/header.php';
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mythical Prints</title>
-  <link rel="stylesheet" href="assets/css/styles.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" />
-</head>
-<body>
-  <header>
-    <a href="index.php"><img src="assets/images/Mythic_Prints_Logo.jpg" class="logo" /></a>
-    <h3>Mythical Prints</h3>
-    <div class="header-container">
-      <div class="nav-links">
-        <a href="bestSellers.php">Best Sellers</a>
-        <a href="newArrivals.php">New Arrivals</a>
-        <a href="#">Genres</a>
-      </div>
-      <div class="header-icons">
-        <form method="GET" action="search.php" class="search-bar">
-          <input type="text" name="query" placeholder="Search by name or tag..." required>
-          <button type="submit" id="search-button"><i class="bi bi-search"></i></button>
-        </form>
-        <a href="login.php"><i class="bi bi-person"></i></a>
-        <i class="bi bi-cart"></i>
 
-        <script>
-          document.addEventListener("DOMContentLoaded", function () {
-            const searchBar = document.querySelector(".search-bar");
-            const searchButton = document.querySelector("#search-button");
-            const inputField = searchBar.querySelector("input");
+<main class="text-center">
+  <h2>Login</h2>
+  <?php if (isset($error)) echo "<p style='color: red;'>$error</p>"; ?>
 
-            searchButton.addEventListener("click", function (event) {
-              if (!searchBar.classList.contains("active")) {
-                event.preventDefault();
-                searchBar.classList.add("active");
-                inputField.focus();
-              }
-            });
+  <form action="login.php" method="POST">
+    <input type="email" name="email" placeholder="Email" required><br>
+    <input type="password" name="password" placeholder="Password" required><br>
+    <button type="submit">Login</button>
+  </form>
 
-            inputField.addEventListener("keypress", function (event) {
-              if (event.key === "Enter" && searchBar.classList.contains("active")) {
-                searchBar.closest("form").submit();
-              }
-            });
-          });
-        </script>
-      </div>
-    </div>
-  </header>
+  <p>Don't have an account? <a href="register.php">Register here</a></p>
+</main>
 
-  <main class="text-center">
-    <h2>Login</h2>
-    <?php if (isset($error)) echo "<p style='color: red;'>$error</p>"; ?>
-
-    <form action="login.php" method="POST">
-      <input type="email" name="email" placeholder="Email" required><br>
-      <input type="password" name="password" placeholder="Password" required><br>
-      <button type="submit">Login</button>
-    </form>
-
-    <p>Don't have an account? <a href="register.php">Register here</a></p>
-  </main>
-
-  <?php include 'includes/footer.php'; ?>
+<?php include 'includes/footer.php'; ?>

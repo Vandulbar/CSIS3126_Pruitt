@@ -103,8 +103,15 @@ function updateAddress($conn, $userId) {
     $stmt = $conn->prepare("UPDATE address SET street = ?, city = ?, state = ?, zipCode = ?, country = ?, addressType = ?
                             WHERE addressId = ? AND userId = ?");
     $stmt->bind_param("ssssssii", $street, $city, $state, $zip, $country, $type, $id, $userId);
-    return $stmt->execute() ? "Address updated successfully." : "Error updating address.";
+    $stmt->execute();
+
+    if ($stmt->affected_rows > 0) {
+        return "Address updated successfully.";
+    } else {
+        return "No changes made or address doesn't belong to this user.";
+    }
 }
+
 
 function deleteAddress($conn, $userId) {
     $addressId = $_POST["addressId"];
