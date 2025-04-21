@@ -2,7 +2,7 @@
 // bestSellers.php
 include 'includes/header.php';
 include 'includes/db.php';
-include 'includes/product_preview.php';
+include 'includes/productPreview.php';
 ?>
 
 <main class="text-center">

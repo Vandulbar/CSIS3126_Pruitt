@@ -2,7 +2,7 @@
 // account.php
 include 'includes/db.php';
 include 'includes/header.php';
-require 'includes/account_functions.php';
+require 'includes/accountFunctions.php';
 
 if (!isset($_SESSION["userId"])) {
     header("Location: login.php");

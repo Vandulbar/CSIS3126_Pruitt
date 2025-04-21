@@ -2,12 +2,8 @@
 // logout.php
 session_start();
 
-if (!empty($_SESSION["lastPage"]) && basename($_SESSION["lastPage"]) != "login.php") {
-    $redirectPage = $_SESSION["lastPage"];
-    unset($_SESSION["lastPage"]);
-} else {
-    $redirectPage = "index.php";
-}
+$redirectPage = isset($_SESSION["lastPage"]) ? $_SESSION["lastPage"] : "index.php";
+session_unset();
 
 session_destroy();
 

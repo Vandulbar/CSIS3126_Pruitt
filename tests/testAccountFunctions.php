@@ -18,9 +18,9 @@ $_POST["newLast"] = "UpdatedLast";
 
 // Address update values
 $_POST["addressId"] = 2; // Replace with real addressId tied to this user
-$_POST["street"] = "456 Updated St";
+$_POST["street"] = "45 Updated St";
 $_POST["city"] = "Updatetown";
-$_POST["state"] = "UP";
+$_POST["state"] = "UPS";
 $_POST["zipCode"] = "54321";
 $_POST["country"] = "Updatedland";
 $_POST["addressType"] = "Shipping";

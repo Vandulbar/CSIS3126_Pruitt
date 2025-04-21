@@ -63,7 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 include 'includes/header.php';
 ?>
 
-<main>
+<main class="text-center">
   <h2>Register</h2>
   <?php if (isset($error)) echo "<p style='color: red;'>$error</p>"; ?>
 
@@ -98,7 +98,7 @@ include 'includes/header.php';
 </main>
 
 <script>
-  // Optional: Basic logic to add another address block
+  //add another address block
   document.getElementById("add-address").addEventListener("click", function () {
     const container = document.getElementById("address-container");
     const clone = container.querySelector(".address-group").cloneNode(true);

@@ -2,13 +2,15 @@
 // header.php
 session_start(); // Ensure session starts
 
-// Track the last visited page unless it's login/register/logout
+// Store last visited page only if it's not login.php and user isn't logged in
 $currentPage = basename($_SERVER['PHP_SELF']);
 $excludePages = ['login.php', 'register.php', 'logout.php'];
-
+ 
 if (!in_array($currentPage, $excludePages)) {
-    $_SESSION["lastPage"] = $_SERVER["REQUEST_URI"];
+  $_SESSION["lastPage"] = $_SERVER["REQUEST_URI"];
 }
+
+
 // Debugging output
 echo "<!-- Last Page: " . ($_SESSION["lastPage"] ?? 'Not Set') . " -->";
 ?>
@@ -38,9 +40,9 @@ echo "<!-- Last Page: " . ($_SESSION["lastPage"] ?? 'Not Set') . " -->";
       <div class="header-container">
         <!-- Navigation Links -->
         <div class="nav-links">
-          <a class="text-decoration-none" href="bestSellers.php">Best Sellers</a>
-          <a class="text-decoration-none" href="newArrivals.php">New Arrivals</a>
-          <a class="text-decoration-none" href="allPosters.php">All Posters</a>
+          <a href="bestSellers.php">Best Sellers</a>
+          <a href="newArrivals.php">New Arrivals</a>
+          <a href="allPosters.php">All Posters</a>
         </div>
         <div class="header-icons">
           <form method="GET" action="search.php" class="search-bar">
@@ -56,7 +58,7 @@ echo "<!-- Last Page: " . ($_SESSION["lastPage"] ?? 'Not Set') . " -->";
           <?php else:
             $_SESSION["lastPage"] = $_SERVER["REQUEST_URI"];
           ?>
-            <a href="login.php"><i class="bi bi-person"></i></a>
+            <a href="login.php?from=<?= urlencode($_SERVER['REQUEST_URI']) ?>"><i class="bi bi-person"></i></a>
           <?php endif; ?>
 
           <a href="cart.php"><i class="bi bi-cart"></i></a>

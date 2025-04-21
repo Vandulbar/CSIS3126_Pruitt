@@ -2,7 +2,7 @@
 // allPosters.php
 include 'includes/header.php';
 include 'includes/db.php';
-include 'includes/product_preview.php';
+include 'includes/productPreview.php';
 
 // Fetch all available tags for the genre filter
 $tagQuery = "SELECT * FROM tag ORDER BY tagName ASC";

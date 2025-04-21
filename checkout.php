@@ -48,7 +48,7 @@ while ($row = $result->fetch_assoc()) {
 }
 ?>
 
-<main>
+<main class="text-center">
   <h2>Checkout</h2>
 
   <form method="POST" action="processOrder.php">
